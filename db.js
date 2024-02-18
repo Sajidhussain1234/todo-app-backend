@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
 
-// const mongoURI = "mongodb://localhost:27017/notesoncloud?appname=MongoDB+Compass&readPreference=primary&tls=false&directConnection=true";
-const mongoURI = process.env.MONGODB_URI;
+async function connectToMongoDb() {
+  try {
+    await mongoose.connect("mongodb://localhost:27017/todoApp", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error.message);
+  }
+}
 
-const connectToMOngoDb = () => {
-  mongoose.connect(mongoURI, () => {
-    console.log("Connected to DB successfully");
-  });
-};
-module.exports = connectToMOngoDb;
+module.exports = connectToMongoDb;
