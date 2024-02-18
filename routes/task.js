@@ -52,7 +52,7 @@ router.get("/fetchalltasks", fetchuser, async (req, res) => {
 });
 
 // Route: 03
-// Updating a task using PUT request:  '/api/tasj/updatetask/:id'   -: Login required
+// Updating a task using PUT request:  '/api/task/updatetask/:id'   -: Login required
 router.put(
   "/updatetask/:id",
   fetchuser, // /updatask/:id   --> here id is a task id
@@ -88,8 +88,31 @@ router.put(
     }
   }
 );
-
 // Route: 04
+// Updating a task status using PUT request:  '/api/task/updatetaskstatus/:id'   -: Login required
+router.put("/updatetaskstatus/:id", fetchuser, async (req, res) => {
+  try {
+    // Find the task whose we want to updated.
+    let task = await Task.findById(req.params.id);
+    if (!task) {
+      return res.status(404).send("Task not found");
+    }
+    if (task.user.toString() !== req.user.id) {
+      return res.status(401).send("Not allowed to update task status");
+    }
+
+    // Update the task status to "completed".
+    task.status = "completed";
+    await task.save();
+
+    res.json(task); // Send the updated task as response.
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Route: 05
 // Delelting a task using DELETE request:  '/api/task/deletetask/:id'   -: Login required
 router.delete(
   "/deletetask/:id",

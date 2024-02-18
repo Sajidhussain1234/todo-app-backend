@@ -3,8 +3,6 @@ mongoose.set("strictQuery", true);
 const { Schema } = mongoose;
 
 const TaskSchema = new Schema({
-  // this is same like foriegn key in mysql
-  // making connection using id with specific user
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
@@ -16,6 +14,10 @@ const TaskSchema = new Schema({
   summary: {
     type: String,
     required: true,
+  },
+  status: {
+    type: String,
+    default: "pending",
   },
   date: {
     type: Date,
