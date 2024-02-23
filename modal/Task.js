@@ -3,6 +3,8 @@ mongoose.set("strictQuery", true);
 const { Schema } = mongoose;
 
 const TaskSchema = new Schema({
+  // this is same like Foreign key in mysql
+  // making connection using id with specific user
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
