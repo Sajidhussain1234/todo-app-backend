@@ -70,7 +70,7 @@ router.post(
   [
     // validation checks on user data
     body("email", "Enter a valid email").isEmail(),
-    body("password", "password can nott be blank").exists(),
+    body("password", "password can not be blank").exists(),
   ],
   async (req, res) => {
     let success = false;
