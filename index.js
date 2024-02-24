@@ -1,9 +1,9 @@
 const express = require("express");
-const process = require("process");
+require("dotenv").config();
 const connectToMOngo = require("./db");
-var cors = require("cors");
 
-const port = process.env.PORT;
+const cors = require("cors");
+const port = process.env.PORT || 8000;
 connectToMOngo();
 const app = express();
 app.use(cors()); // cors() method is used to handle cors policy. -: 'http://localhost:3000' has been blocked by CORS policy:
