@@ -11,15 +11,14 @@ router.post(
   fetchuser,
   [
     // validation checks on creating task
-    body("title", "Length of title must be atleast three character,").isLength({
-      min: 3,
-    }),
-    body(
-      "summary",
-      "Length of summary must be atleast five character"
-    ).isLength({
+    body("title", "Length of title must be atleast one character,").isLength({
       min: 1,
     }),
+    body("summary", "Length of summary must be atleast one character").isLength(
+      {
+        min: 1,
+      }
+    ),
   ],
   async (req, res) => {
     // Finds the validation errors in this request, if therer are error return bad request and errors and wraps them in an object with handy functions
